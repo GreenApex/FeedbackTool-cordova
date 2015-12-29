@@ -1,0 +1,24 @@
+<style type="text/css">
+
+</style>
+<ion-view view-title="Havvaa">
+    <ion-content>
+        <div class="card" style="margin-top:50px">
+            <form ng-submit="doLogin()">
+                <div class="list">
+                    <label class="item item-input">
+                        <span class="input-label">Username</span>
+                        <input type="text" ng-model="loginForm.userName">
+                    </label>
+                    <label class="item item-input">
+                        <span class="input-label">Password</span>
+                        <input type="password" ng-model="loginForm.password">
+                    </label>
+                    <label class="item">
+                        <button class="button button-block button-positive" type="submit">Log in</button>
+                    </label>
+                </div>
+            </form>
+        </div>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,28 @@
+<!--
+  This template loads for the 'tab.friend-detail' state (app.js)
+  'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+  The FriendsCtrl pulls data from the Friends service (service.js)
+  The Friends service returns an array of friend data
+-->
+<ion-view view-title="Message Details">
+    <ion-content class="padding">
+        <div class="list card">
+            <div class="item">
+                <p>{{messageDetails.commentDate}}</p>
+            </div>
+            <div class="item item-body">
+                <p>{{messageDetails.commentsDetail}}
+                </p>
+            </div>
+            <div class="item item-image" ng-show="{{messageDetails.filepath | fileType}}">
+                <img ng-src="http://feedbacktool-env.elasticbeanstalk.com/{{messageDetails.filepath}}">
+            </div>
+            
+            <video width="100%" controls class="item item-image" ng-hide="{{messageDetails.filepath | fileType}}">
+                <source ng-src="{{getIframeSrc(messageDetails.filepath) | trustVideo}}">
+            </video>
+            
+            
+        </div>
+    </ion-content>
+</ion-view>

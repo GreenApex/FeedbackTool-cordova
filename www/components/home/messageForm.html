@@ -1,0 +1,69 @@
+<ion-view view-title="Hello {{userDetails.userName}}">
+    <ion-nav-buttons side="right">
+        <button class="button button-assertive" ng-click="logout()">
+            Logout
+        </button>
+    </ion-nav-buttons>
+    <ion-content>
+        <div class="list list-inset">
+            <label class="item item-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="text" ng-model="searchForm.searchText" ng-change="formPageSearch()" placeholder="Search">
+            </label>
+        </div>
+        <ul class="list" ng-show="isSearchResult">
+            <li class="item" ng-repeat="eachSearchResult in searchResult" ng-click="showMessageDetails1({{eachSearchResult.commentId}})">
+                {{eachSearchResult.commentsDetail}}
+            </li>
+        </ul>
+        <div class="list list-inset">
+            <div class="item item-divider" style="margin-top:15px">
+                Message
+            </div>
+            <label class="item item-input item-stacked-label">
+                <textarea style="resize:none" ng-model="messageForm.message" placeholder="Type your message here ... " rows="8" cols="10">
+                </textarea>
+            </label>
+            <div class="item item-input-inset">
+                <button ng-click="selectFile()" class="button button-small button-dark" style="padding:5px 10px">
+                    Browse File
+                </button>
+                &nbsp;&nbsp;{{messageForm.filePath}}
+            </div>
+            <div class="item">
+                <progress value="{{uploaded}}" max="{{totalFileSize}}">
+                </progress>
+            </div>
+            <div class="item item-input-inset">
+                <div class=row>
+                    <div class="col-20">
+                        <button class="button button-small button-dark" style="padding:5px 10px" ng-click="submitMessage()">Submit </button>
+                    </div>
+                    <div class="col-20">
+                        <button class="button button-small button-stable" style="padding:5px 10px" ng-click="resetForm();">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card" ng-repeat="eachComment in comments | orderBy : '-commentDate'" ng-click="showMessageDetails1({{eachComment.commentId}})">
+            <div class="item item-divider">
+                {{eachComment.commentDate}}
+            </div>
+            <div class="item item-thumbnail-left item-text-wrap" ng-show="{{eachComment.filepath | fileType}}">
+                <img ng-src="http://feedbacktool-env.elasticbeanstalk.com/{{eachComment.filepath}}"> {{eachComment.commentsDetail}}
+            </div>
+            <div class="item item-thumbnail-left item-text-wrap" ng-hide="{{eachComment.filepath | fileType}}">
+                <img src="img/images.jpeg"> {{eachComment.commentsDetail}}
+            </div>
+        </div>
+    </ion-content>
+    <ion-footer-bar align-title="center" class="bar-positive" ng-show="totalPages>1">
+        <div class="buttons" ng-click="previousPage()" ng-show="currentPageNumber>0">
+            <button class="button">Previous</button>
+        </div>
+        <h1 class="title">Current Page : {{currentPageNumber+1}}</h1>
+        <div class="buttons" ng-show="currentPageNumber<(totalPages-1)">
+            <button class="button" ng-click="nextPage()">Next</button>
+        </div>
+    </ion-footer-bar>
+</ion-view>
